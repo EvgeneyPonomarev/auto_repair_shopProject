@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище auto_repair_shopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id_car" />
+          </Key>
+          <Property Name="id_car" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="car_brand" Type="varchar" MaxLength="50" />
+          <Property Name="car_model" Type="varchar" MaxLength="50" />
+          <Property Name="year_of_manufacture" Type="int" />
+          <Property Name="number_car" Type="varchar" MaxLength="10" />
+          <Property Name="photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="surname" Type="varchar" MaxLength="50" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_specialties" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="surname" Type="varchar" MaxLength="50" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="job_title" Type="varchar" MaxLength="50" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="History_Orders">
+          <Key>
+            <PropertyRef Name="id_record" />
+          </Key>
+          <Property Name="id_record" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="id_car" Type="int" />
+          <Property Name="id_services" Type="int" />
+          <Property Name="id_part" Type="int" />
+          <Property Name="id_employer" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="id_service" Type="int" />
+          <Property Name="id_car" Type="int" />
+          <Property Name="date_order" Type="date" />
+          <Property Name="execution_status" Type="int" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_service" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="Spare_Parts">
+          <Key>
+            <PropertyRef Name="id_part" />
+          </Key>
+          <Property Name="id_part" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_service" Type="int" />
+          <Property Name="name_parts" Type="varchar" MaxLength="50" />
+          <Property Name="photo" Type="varbinary(max)" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="int" />
+          <Property Name="presence" Type="int" />
+        </EntityType>
+        <EntityType Name="Specialities">
+          <Key>
+            <PropertyRef Name="id_specialties" />
+          </Key>
+          <Property Name="id_specialties" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_specialties" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Cars__id_client__267ABA7A">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__id_sp__34C8D9D1">
+          <End Role="Specialities" Type="Self.Specialities" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="id_specialties" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_specialties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_ca__38996AB5">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id_car" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_cl__37A5467C">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_em__3B75D760">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_employer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_pa__3A81B327">
+          <End Role="Spare_Parts" Type="Self.Spare_Parts" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_Parts">
+              <PropertyRef Name="id_part" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_se__398D8EEE">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_car__2D27B809">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id_car" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_clien__2B3F6F97">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_servi__2C3393D0">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spare_Par__id_se__300424B4">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Spare_Parts" Type="Self.Spare_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="Spare_Parts">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище auto_repair_shopModelContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_Orders" EntityType="Self.History_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spare_Parts" EntityType="Self.Spare_Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialities" EntityType="Self.Specialities" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cars__id_client__267ABA7A" Association="Self.FK__Cars__id_client__267ABA7A">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__id_sp__34C8D9D1" Association="Self.FK__Employees__id_sp__34C8D9D1">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_ca__38996AB5" Association="Self.FK__History_O__id_ca__38996AB5">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_cl__37A5467C" Association="Self.FK__History_O__id_cl__37A5467C">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_em__3B75D760" Association="Self.FK__History_O__id_em__3B75D760">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_pa__3A81B327" Association="Self.FK__History_O__id_pa__3A81B327">
+            <End Role="Spare_Parts" EntitySet="Spare_Parts" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_se__398D8EEE" Association="Self.FK__History_O__id_se__398D8EEE">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_car__2D27B809" Association="Self.FK__Orders__id_car__2D27B809">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_clien__2B3F6F97" Association="Self.FK__Orders__id_clien__2B3F6F97">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_servi__2C3393D0" Association="Self.FK__Orders__id_servi__2C3393D0">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spare_Par__id_se__300424B4" Association="Self.FK__Spare_Par__id_se__300424B4">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Spare_Parts" EntitySet="Spare_Parts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="auto_repair_shopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id_car" />
+          </Key>
+          <Property Name="id_car" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="car_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="year_of_manufacture" Type="Int32" />
+          <Property Name="number_car" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Cars__id_client__267ABA7A" FromRole="Cars" ToRole="Clients" />
+          <NavigationProperty Name="History_Orders" Relationship="Self.FK__History_O__id_ca__38996AB5" FromRole="Cars" ToRole="History_Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_car__2D27B809" FromRole="Cars" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__Cars__id_client__267ABA7A" FromRole="Clients" ToRole="Cars" />
+          <NavigationProperty Name="History_Orders" Relationship="Self.FK__History_O__id_cl__37A5467C" FromRole="Clients" ToRole="History_Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_clien__2B3F6F97" FromRole="Clients" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_specialties" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="job_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Specialities" Relationship="Self.FK__Employees__id_sp__34C8D9D1" FromRole="Employees" ToRole="Specialities" />
+          <NavigationProperty Name="History_Orders" Relationship="Self.FK__History_O__id_em__3B75D760" FromRole="Employees" ToRole="History_Orders" />
+        </EntityType>
+        <EntityType Name="History_Orders">
+          <Key>
+            <PropertyRef Name="id_record" />
+          </Key>
+          <Property Name="id_record" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="id_car" Type="Int32" />
+          <Property Name="id_services" Type="Int32" />
+          <Property Name="id_part" Type="Int32" />
+          <Property Name="id_employer" Type="Int32" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__History_O__id_ca__38996AB5" FromRole="History_Orders" ToRole="Cars" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__History_O__id_cl__37A5467C" FromRole="History_Orders" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__History_O__id_em__3B75D760" FromRole="History_Orders" ToRole="Employees" />
+          <NavigationProperty Name="Spare_Parts" Relationship="Self.FK__History_O__id_pa__3A81B327" FromRole="History_Orders" ToRole="Spare_Parts" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__History_O__id_se__398D8EEE" FromRole="History_Orders" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="id_service" Type="Int32" />
+          <Property Name="id_car" Type="Int32" />
+          <Property Name="date_order" Type="DateTime" Precision="0" />
+          <Property Name="execution_status" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__Orders__id_car__2D27B809" FromRole="Orders" ToRole="Cars" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Orders__id_clien__2B3F6F97" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Orders__id_servi__2C3393D0" FromRole="Orders" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_service" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="History_Orders" Relationship="Self.FK__History_O__id_se__398D8EEE" FromRole="Services" ToRole="History_Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__id_servi__2C3393D0" FromRole="Services" ToRole="Orders" />
+          <NavigationProperty Name="Spare_Parts" Relationship="Self.FK__Spare_Par__id_se__300424B4" FromRole="Services" ToRole="Spare_Parts" />
+        </EntityType>
+        <EntityType Name="Spare_Parts">
+          <Key>
+            <PropertyRef Name="id_part" />
+          </Key>
+          <Property Name="id_part" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_service" Type="Int32" />
+          <Property Name="name_parts" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="presence" Type="Int32" />
+          <NavigationProperty Name="History_Orders" Relationship="Self.FK__History_O__id_pa__3A81B327" FromRole="Spare_Parts" ToRole="History_Orders" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Spare_Par__id_se__300424B4" FromRole="Spare_Parts" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Specialities">
+          <Key>
+            <PropertyRef Name="id_specialties" />
+          </Key>
+          <Property Name="id_specialties" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_specialties" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__id_sp__34C8D9D1" FromRole="Specialities" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__Cars__id_client__267ABA7A">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_ca__38996AB5">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id_car" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_car__2D27B809">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id_car" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_cl__37A5467C">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_clien__2B3F6F97">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__id_sp__34C8D9D1">
+          <End Role="Specialities" Type="Self.Specialities" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="id_specialties" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_specialties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_em__3B75D760">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_employer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_pa__3A81B327">
+          <End Role="Spare_Parts" Type="Self.Spare_Parts" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spare_Parts">
+              <PropertyRef Name="id_part" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__History_O__id_se__398D8EEE">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="History_Orders" Type="Self.History_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="History_Orders">
+              <PropertyRef Name="id_services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__id_servi__2C3393D0">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spare_Par__id_se__300424B4">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Spare_Parts" Type="Self.Spare_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="Spare_Parts">
+              <PropertyRef Name="id_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="auto_repair_shopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="History_Orders" EntityType="Self.History_Orders" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Spare_Parts" EntityType="Self.Spare_Parts" />
+          <EntitySet Name="Specialities" EntityType="Self.Specialities" />
+          <AssociationSet Name="FK__Cars__id_client__267ABA7A" Association="Self.FK__Cars__id_client__267ABA7A">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_ca__38996AB5" Association="Self.FK__History_O__id_ca__38996AB5">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_car__2D27B809" Association="Self.FK__Orders__id_car__2D27B809">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_cl__37A5467C" Association="Self.FK__History_O__id_cl__37A5467C">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_clien__2B3F6F97" Association="Self.FK__Orders__id_clien__2B3F6F97">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__id_sp__34C8D9D1" Association="Self.FK__Employees__id_sp__34C8D9D1">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_em__3B75D760" Association="Self.FK__History_O__id_em__3B75D760">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_pa__3A81B327" Association="Self.FK__History_O__id_pa__3A81B327">
+            <End Role="Spare_Parts" EntitySet="Spare_Parts" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__History_O__id_se__398D8EEE" Association="Self.FK__History_O__id_se__398D8EEE">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="History_Orders" EntitySet="History_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__id_servi__2C3393D0" Association="Self.FK__Orders__id_servi__2C3393D0">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spare_Par__id_se__300424B4" Association="Self.FK__Spare_Par__id_se__300424B4">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Spare_Parts" EntitySet="Spare_Parts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище auto_repair_shopModelContainer" CdmEntityContainer="auto_repair_shopEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Cars">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="id_car" ColumnName="id_car" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="car_brand" ColumnName="car_brand" />
+                <ScalarProperty Name="car_model" ColumnName="car_model" />
+                <ScalarProperty Name="year_of_manufacture" ColumnName="year_of_manufacture" />
+                <ScalarProperty Name="number_car" ColumnName="number_car" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_specialties" ColumnName="id_specialties" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="job_title" ColumnName="job_title" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_Orders">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.History_Orders">
+              <MappingFragment StoreEntitySet="History_Orders">
+                <ScalarProperty Name="id_record" ColumnName="id_record" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_car" ColumnName="id_car" />
+                <ScalarProperty Name="id_services" ColumnName="id_services" />
+                <ScalarProperty Name="id_part" ColumnName="id_part" />
+                <ScalarProperty Name="id_employer" ColumnName="id_employer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="id_car" ColumnName="id_car" />
+                <ScalarProperty Name="date_order" ColumnName="date_order" />
+                <ScalarProperty Name="execution_status" ColumnName="execution_status" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="name_service" ColumnName="name_service" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spare_Parts">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Spare_Parts">
+              <MappingFragment StoreEntitySet="Spare_Parts">
+                <ScalarProperty Name="id_part" ColumnName="id_part" />
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="name_parts" ColumnName="name_parts" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="presence" ColumnName="presence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialities">
+            <EntityTypeMapping TypeName="auto_repair_shopModel.Specialities">
+              <MappingFragment StoreEntitySet="Specialities">
+                <ScalarProperty Name="id_specialties" ColumnName="id_specialties" />
+                <ScalarProperty Name="name_specialties" ColumnName="name_specialties" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5c48d4e3e3f4762bf21ea73e284c5ec" Name="Diagram1">
+        <EntityTypeShape EntityType="auto_repair_shopModel.Admin" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Cars" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Clients" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Employees" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.History_Orders" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Orders" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Services" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Spare_Parts" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="auto_repair_shopModel.Specialities" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Cars__id_client__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__History_O__id_ca__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Orders__id_car__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__History_O__id_cl__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Orders__id_clien__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Employees__id_sp__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__History_O__id_em__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__History_O__id_pa__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__History_O__id_se__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Orders__id_servi__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="auto_repair_shopModel.FK__Spare_Par__id_se__300424B4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

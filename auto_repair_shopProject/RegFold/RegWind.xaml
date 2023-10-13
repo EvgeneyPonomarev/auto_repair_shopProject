@@ -1,0 +1,25 @@
+﻿<Window x:Class="auto_repair_shopProject.RegFold.RegWind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auto_repair_shopProject.RegFold"
+        mc:Ignorable="d"
+        Title="RegWind" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#C1B49C">
+    <Grid>
+        <TextBox Name="name" Text="{Binding name}" PreviewTextInput="name_PreviewTextInput" Margin="115,136,456,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <TextBox Name="surname" Text="{Binding surname}" PreviewTextInput="name_PreviewTextInput" Margin="115,195,456,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <TextBox Name="patronymic" Text="{Binding patronymic}" PreviewTextInput="name_PreviewTextInput" Margin="115,251,456,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <TextBox Name="email" Text="{Binding email}" PreviewTextInput="email_PreviewTextInput" Margin="503,136,68,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <TextBox Name="log" Text="{Binding login}" PreviewTextInput="log_PreviewTextInput" Margin="503,195,68,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <TextBox Name="pswd" Text="{Binding password}" PreviewTextInput="log_PreviewTextInput" Margin="503,251,68,0" FontSize="18" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Имя: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="61,135,0,0"/>
+        <Label Content="Фамилия: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="31,195,0,0"/>
+        <Label Content="Отчество: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="24,250,0,0"/>
+        <Label Content="Почта: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="430,135,0,0"/>
+        <Label Content="Логин: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="430,195,0,0"/>
+        <Label Content="Пароль: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="425,250,0,0"/>
+        <Button x:Name="BtnLog" Width="150" Height="30" Content="Сохранить" Click="BtnLog_Click" Margin="325,332,325,88" Background="#454438" Foreground="White"/>
+        <Button Content="Х" HorizontalAlignment="Left" Margin="730,10,0,0" VerticalAlignment="Top" Height="24" Width="60" Background="#454438" Foreground="White" x:Name="close" Click="close_Click"/>
+    </Grid>
+</Window>

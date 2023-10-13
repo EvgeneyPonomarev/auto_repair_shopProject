@@ -1,0 +1,41 @@
+﻿<Window x:Class="auto_repair_shopProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auto_repair_shopProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#C1B49C">
+    <Grid>
+        <Button Content="Х" HorizontalAlignment="Left" Margin="730,10,0,0" VerticalAlignment="Top" Height="24" Width="60" Background="#454438" Foreground="White" Name="close" Click="close_Click"/>
+        <ListView Name="LViewCar" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" Margin="0,46,0,45" MouseDoubleClick="LViewCar_MouseDoubleClick" Background="#C1B49C">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding car_brand}" HorizontalAlignment="Center" Margin="5 5 5 15" FontSize="15" Grid.Row="0" FontWeight="Bold"/>
+                        <Image Height="150" Width="150" Source="{Binding photo}" Grid.Row="1"/>
+                        <TextBlock Text="{Binding car_model}" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="100" TextWrapping="Wrap" Margin="5 5" FontSize="15" Grid.Row="2"/>
+                        <TextBlock Text="{Binding year_of_manufacture}" HorizontalAlignment="Center" Margin="5 5 5 15" FontSize="15" Grid.Row="3" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding number_car}" HorizontalAlignment="Center" Margin="5 5 5 15" FontSize="15" Grid.Row="4" FontWeight="Bold"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Content="Выберите машину которой требуется обслуживание: " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="0,6,0,0"/>
+        <Button Content="Профиль" HorizontalAlignment="Left" Margin="665,10,0,0" VerticalAlignment="Top" Height="24" Width="60" Background="#454438" Foreground="White" x:Name="profile" Click="profile_Click"/>
+        <Button Content="Удалить машину" HorizontalAlignment="Left" Margin="282,416,0,0" VerticalAlignment="Top" Height="24" Width="109" Background="#454438" Foreground="White" x:Name="delete" Click="delete_Click"/>
+        <Button Content="Изменить данные" HorizontalAlignment="Left" Margin="434,416,0,0" VerticalAlignment="Top" Height="24" Width="109" Background="#454438" Foreground="White" x:Name="edit" Click="edit_Click"/>
+    </Grid>
+</Window>

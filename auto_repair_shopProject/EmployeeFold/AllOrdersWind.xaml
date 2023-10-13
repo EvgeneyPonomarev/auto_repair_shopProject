@@ -1,0 +1,25 @@
+﻿<Window x:Class="auto_repair_shopProject.EmployeeFold.AllOrdersWind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auto_repair_shopProject.EmployeeFold"
+        mc:Ignorable="d"
+        Title="AllOrdersWind" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#C1B49C">
+    <Grid>
+        <Button Content="Х" HorizontalAlignment="Left" Margin="730,10,0,0" VerticalAlignment="Top" Height="24" Width="60" Background="#454438" Foreground="White" x:Name="close" Click="close_Click"/>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="0,72,0,83" Name="gridOrder">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Clients.name}" Header="Имя клиента" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Clients.surname}" Header="Фамилия клиента" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Clients.patronymic}" Header="Отчество клиента" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Services.name_service}" Header="Название сервиса" Width="*" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Employees.name}" Header="Имя мастера" Width="*" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Employees.surname}" Header="Фамилия мастера" Width="*" MinWidth="100"/>
+                <DataGridTextColumn Binding="{Binding Employees.patronymic}" Header="Отчество мастера" Width="*" MinWidth="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox HorizontalAlignment="Center" Name="comboEmpl" DisplayMemberPath="surname" Margin="0,22,0,0" VerticalAlignment="Top" Width="144" Height="27" SelectionChanged="comboEmpl_SelectionChanged"/>
+        <Label Content="Выберите мастера: " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Margin="156,19,0,0" Width="172"/>
+    </Grid>
+</Window>

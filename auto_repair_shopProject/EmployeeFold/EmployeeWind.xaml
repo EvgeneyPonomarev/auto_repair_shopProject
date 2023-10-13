@@ -1,0 +1,39 @@
+﻿<Window x:Class="auto_repair_shopProject.EmployeeFold.EmployeeWind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auto_repair_shopProject.EmployeeFold"
+        mc:Ignorable="d"
+        Title="EmployeeWind" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#C1B49C">
+    <Grid>
+        <ListView Margin="91,130,91,69" x:Name="viewNewOrder" Background="#C1B49C" MouseDoubleClick="viewNewOrder_MouseDoubleClick">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Services.name_service}" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="100" TextWrapping="Wrap" Margin="5 5" FontSize="15" Grid.Row="0"/>
+                        <TextBlock Text="{Binding Cars.car_brand}" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="100" TextWrapping="Wrap" Margin="5 5" FontSize="15" Grid.Row="1"/>
+                        <TextBlock Text="{Binding date_order}" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="100" TextWrapping="Wrap" Margin="5 5" FontSize="15" Grid.Row="2"/>
+                        <TextBlock Text="{Binding execution_status, StringFormat='Процент выполнения: {0}%'}" HorizontalAlignment="Center" Margin="5 5 5 15" FontSize="15" Grid.Row="3" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding price, StringFormat='Цена: {0}р.'}" HorizontalAlignment="Center" Margin="0 5 5 5" FontSize="15" Grid.Row="4" FontWeight="Bold"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Content="Активные заказы: " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Margin="0,88,0,0" Width="172"/>
+        <Button Content="Х" HorizontalAlignment="Left" Margin="730,10,0,0" VerticalAlignment="Top" Height="24" Width="60" Background="#454438" Foreground="White" x:Name="close" Click="close_Click"/>
+        <Button x:Name="allOrders" Width="150" Height="30" Content="Все заказы" Click="allOrders_Click" Margin="10,10,640,410" Background="#454438" Foreground="White"/>
+    </Grid>
+</Window>

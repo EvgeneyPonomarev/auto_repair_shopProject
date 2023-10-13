@@ -1,0 +1,28 @@
+﻿<Page x:Class="auto_repair_shopProject.EmployeeFold.EmployeeAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:auto_repair_shopProject.EmployeeFold"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EmployeeAdmin" Background="#C1B49C" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Name="gridEmployee" Margin="0,0,0,125">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding name}" Header="Имя" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding surname}" Header="Фамилия" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding patronymic}" Header="Отчество" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding job_title}" Header="Должность" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Specialities.name_specialties}" Header="Специальность" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding email}" Header="Почта" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding login}" Header="Логин" MinWidth="100" Width="*"/>
+                <DataGridTextColumn Binding="{Binding password}" Header="Пароль" MinWidth="100" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="delete" Content="Удалить" Click="delete_Click"  Background="#454438" Foreground="White" Margin="111,330,568,91"/>
+        <Button x:Name="add" Content="Добавить" Click="add_Click" Margin="338,330,342,91" Background="#454438" Foreground="White"/>
+        <Button x:Name="edit" Content="Изменить" Click="edit_Click" Margin="571,330,109,91" Background="#454438" Foreground="White"/>
+    </Grid>
+</Page>
